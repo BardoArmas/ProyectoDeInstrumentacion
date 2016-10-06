@@ -8,7 +8,7 @@ package com.app.vista.ig;
 
 import com.app.controlador.sesion.Sesion;
 import com.app.modelo.arduino.ComunicacionArduino;
-import com.app.modelo.conexion.Conexion;
+import com.app.modelo.conexion.db.Conexion;
 
 public class Splash extends javax.swing.JFrame {
 

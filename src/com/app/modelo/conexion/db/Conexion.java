@@ -1,7 +1,7 @@
 /*
 Objeto de conexion para mysql
  */
-package com.app.modelo.conexion;
+package com.app.modelo.conexion.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

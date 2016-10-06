@@ -4,7 +4,7 @@ Dedicado solo a buscar el usuario para poder leerlo
 package com.app.controlador.usuario;
 
 import com.app.controlador.sesion.Sesion;
-import com.app.modelo.conexion.Conexion;
+import com.app.modelo.conexion.db.Conexion;
 import com.app.modelo.dao.UsuarioDAOImple;
 import com.app.modelo.entidades.Usuario;
 import com.app.vista.ig.Login;

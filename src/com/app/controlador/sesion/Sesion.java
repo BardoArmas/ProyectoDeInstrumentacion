@@ -5,7 +5,7 @@ pasando de vista en vista
 package com.app.controlador.sesion;
 
 import com.app.modelo.arduino.ComunicacionArduino;
-import com.app.modelo.conexion.Conexion;
+import com.app.modelo.conexion.db.Conexion;
 import com.app.modelo.entidades.Parametro;
 import com.app.modelo.entidades.Usuario;
 

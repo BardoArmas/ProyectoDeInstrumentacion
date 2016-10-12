@@ -9,23 +9,24 @@ package com.app.vista.ig;
 import com.app.controlador.sesion.Sesion;
 import com.app.modelo.arduino.ComunicacionArduino;
 import com.app.modelo.conexion.db.Conexion;
+import javax.swing.JOptionPane;
 
 public class Splash extends javax.swing.JFrame {
 
-    private class BarraDeEstado extends Thread {
+    private class Cargar extends Thread {
         
         private Splash splash;
         private Sesion sesion;
         private Conexion conexion;
         private ComunicacionArduino arduino;
 
-        public BarraDeEstado(Splash splash){
+        public Cargar(Splash splash){
             this.splash = splash;
         }
         @Override
         public void run() {
             //Procedimiento de guardar
-           //Se checa que realmente se puede caragar todo
+            //Se checa que realmente se puede caragar todo
             try {
                 //Iniciar la seccion
                 sesion = new Sesion();
@@ -33,24 +34,27 @@ public class Splash extends javax.swing.JFrame {
                 barra.setValue(10);
                 Thread.sleep(150);
                 //Iniciar la conexion a SQL y conectar
-                conexion = new Conexion();
-                conexion.conectar();
                 estado.setText("Inicio de la conexion a MySQL");
+                conexion = new Conexion();
+                if(!conexion.conectar()){
+                    estado.setText("No exite la base de datos");
+                    barra.setValue(0);
+                    JOptionPane.showMessageDialog(splash, "Error en la conexion a la base de datos", "Base de Datos no encontrada", JOptionPane.ERROR_MESSAGE);
+                    splash.dispose();
+                    return;
+                }
                 sesion.setMySQL(conexion);
                 barra.setValue(30);
                 Thread.sleep(150);
                 //Iniciar la conexion con arduino
-                arduino = new ComunicacionArduino();
                 estado.setText("Conexion con puertos COM");
+                arduino = new ComunicacionArduino();
                 sesion.setArduino(arduino);
-                barra.setValue(49);
+                barra.setValue(50);
                 Thread.sleep(150);
-                for (int i = 50; i < 100; i++) {
-                    //Cargando, aqui se puede agegar el estado de los elementos que se estan cargando antes de el menu pricipal
-                    barra.setValue(i);
-                    Thread.sleep(15);
-                }
                 estado.setText("Se subio la session");
+                Thread.sleep(150);
+                barra.setValue(100);
                 new Login(sesion).setVisible(true);
                 estado.setText("Terminado");
                 splash.setVisible(false);
@@ -64,7 +68,7 @@ public class Splash extends javax.swing.JFrame {
 
     public Splash() {
         initComponents();
-        new BarraDeEstado(this).start();
+        new Cargar(this).start();
     }
 
     @SuppressWarnings("unchecked")

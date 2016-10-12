@@ -16,17 +16,19 @@ public class Conexion {
     private final String pass  = "avecias";
     private Connection conexion;
     
-    public Connection conectar() {
+    public boolean conectar() {
+        boolean estado = false;
         try {
             Class.forName(driver);
             conexion = DriverManager.getConnection(url, root, pass);
             System.out.println("Conexion exitosa");
+            estado  = true;
         } catch (ClassNotFoundException ex) {
             System.err.println("Driver no encontrado " + ex);
         } catch (SQLException ex) {
             System.err.println("Conexion no extablecida " + ex);
         }
-        return conexion;
+        return estado;
     }
 
     public Connection getConexion() {

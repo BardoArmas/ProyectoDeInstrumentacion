@@ -12,7 +12,7 @@ public class Parametro {
     public Parametro() {
     }
 
-    public Parametro(String puerto, int dato, int baudios, int paro, int paridad) {
+    public Parametro(String puerto, int baudios, int dato, int paro, int paridad) {
         this.puerto = puerto;
         this.dato = dato;
         this.baudios = baudios;

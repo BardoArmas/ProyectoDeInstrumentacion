@@ -7,8 +7,9 @@ o cehcar los puertos necesarios
 package com.app.vista.ig;
 
 import com.app.controlador.sesion.Sesion;
-import com.app.modelo.arduino.ComunicacionArduino;
-import com.app.modelo.conexion.db.Conexion;
+import com.app.modelo.conexion.db.ConexionSQL;
+import com.app.modelo.conexion.serial.ConexionSerial;
+import com.app.modelo.conexion.serial.ConexionSerialImple;
 import javax.swing.JOptionPane;
 
 public class Splash extends javax.swing.JFrame {
@@ -17,8 +18,8 @@ public class Splash extends javax.swing.JFrame {
         
         private Splash splash;
         private Sesion sesion;
-        private Conexion conexion;
-        private ComunicacionArduino arduino;
+        private ConexionSQL conexion;
+        private ConexionSerial conexionSerial;
 
         public Cargar(Splash splash){
             this.splash = splash;
@@ -35,7 +36,7 @@ public class Splash extends javax.swing.JFrame {
                 Thread.sleep(150);
                 //Iniciar la conexion a SQL y conectar
                 estado.setText("Inicio de la conexion a MySQL");
-                conexion = new Conexion();
+                conexion = new ConexionSQL();
                 if(!conexion.conectar()){
                     estado.setText("No exite la base de datos");
                     barra.setValue(0);
@@ -43,13 +44,14 @@ public class Splash extends javax.swing.JFrame {
                     splash.dispose();
                     return;
                 }
-                sesion.setMySQL(conexion);
+                //La conexion fue exitosa
+                sesion.setConexionSQL(conexion);
                 barra.setValue(30);
                 Thread.sleep(150);
                 //Iniciar la conexion con arduino
                 estado.setText("Conexion con puertos COM");
-                arduino = new ComunicacionArduino();
-                sesion.setArduino(arduino);
+                conexionSerial = new ConexionSerialImple();
+                sesion.setConexionSerial(conexionSerial);
                 barra.setValue(50);
                 Thread.sleep(150);
                 estado.setText("Se subio la session");

@@ -5,9 +5,9 @@ como baudios, bytes, bit de paro
 package com.app.vista.ig;
 
 import com.app.controlador.sesion.Sesion;
-import com.app.controlador.usuario.ComunicarArduino;
+import com.app.controlador.usuario.ConectarPuerto;
+import com.app.modelo.conexion.serial.ConexionSerialImple;
 import com.app.modelo.entidades.Parametro;
-import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -44,9 +44,9 @@ public class Principal extends javax.swing.JFrame {
         comboPuertos = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        menuConectar = new javax.swing.JMenuItem();
+        menuSalir = new javax.swing.JMenuItem();
+        menuReporte = new javax.swing.JMenu();
         menuMuestrasAlmacenadas = new javax.swing.JMenuItem();
         menuUsuario = new javax.swing.JMenu();
         menuVerUsuario = new javax.swing.JMenuItem();
@@ -156,20 +156,20 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu1.setText("Archivo");
 
-        jMenuItem2.setText("Conectar");
-        jMenu1.add(jMenuItem2);
+        menuConectar.setText("Conectar");
+        jMenu1.add(menuConectar);
 
-        jMenuItem1.setText("Salir");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menuSalir.setText("Salir");
+        menuSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                menuSalirActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(menuSalir);
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Reporte");
+        menuReporte.setText("Reporte");
 
         menuMuestrasAlmacenadas.setText("Muestras Almacanadas");
         menuMuestrasAlmacenadas.addActionListener(new java.awt.event.ActionListener() {
@@ -177,13 +177,13 @@ public class Principal extends javax.swing.JFrame {
                 menuMuestrasAlmacenadasActionPerformed(evt);
             }
         });
-        jMenu2.add(menuMuestrasAlmacenadas);
+        menuReporte.add(menuMuestrasAlmacenadas);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(menuReporte);
 
         menuUsuario.setText("Usuario");
 
-        menuVerUsuario.setText("ver");
+        menuVerUsuario.setText("Ver");
         menuVerUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuVerUsuarioActionPerformed(evt);
@@ -219,20 +219,15 @@ public class Principal extends javax.swing.JFrame {
     private void botonConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConectarActionPerformed
         // TODO add your handling code here:
         establecerParametros();
-        ComunicarArduino.hacer(sesion, this);
+        ConectarPuerto.hacer(sesion, this);
     }//GEN-LAST:event_botonConectarActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        try {
-            // TODO add your handling code here:
-            //Aqui se puede ser una funcion para guardar los cambios que se han realizado
-            sesion.getArduino().terminar();
-        } catch (Exception ex) {
-            System.err.println("Error al cerrar arduino " + ex);
-        }
+    private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
+        //Salir
+        
         this.setVisible(false);
         this.dispose();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_menuSalirActionPerformed
 
     private void menuMuestrasAlmacenadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMuestrasAlmacenadasActionPerformed
         // TODO add your handling code here:
@@ -259,11 +254,11 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem menuConectar;
     private javax.swing.JMenuItem menuMuestrasAlmacenadas;
+    private javax.swing.JMenu menuReporte;
+    private javax.swing.JMenuItem menuSalir;
     private javax.swing.JMenu menuUsuario;
     private javax.swing.JMenuItem menuVerUsuario;
     private javax.swing.JComboBox<String> numeroSensores;
@@ -271,9 +266,9 @@ public class Principal extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void iniciarParametros() {
-        List<String> puertos = sesion.getArduino().puertos();
-        for (String puerto : puertos) {
-            comboPuertos.addItem(puerto);
+        Object[] puertos = ConexionSerialImple.puertosDisponibles();
+        for (Object puerto : puertos) {
+            comboPuertos.addItem((String) puerto);
         }
     }
 

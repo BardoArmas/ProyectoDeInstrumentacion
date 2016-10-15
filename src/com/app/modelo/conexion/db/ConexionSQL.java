@@ -8,7 +8,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 
-public class Conexion {
+public class ConexionSQL {
 
     private final String driver = "com.mysql.jdbc.Driver";
     private final String url = "jdbc:mysql://localhost:3306/proyecto_instrumentacion";

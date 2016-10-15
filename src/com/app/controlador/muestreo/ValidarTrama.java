@@ -62,12 +62,4 @@ public class ValidarTrama {
     private boolean isNumero(char c) {
         return c >= 48 && c <= 57;
     }
-
-    public static void main(String[] args) {
-        String trama = "a9999b9999c9999";
-        double[] res = new ValidarTrama().hacer(trama);
-        System.out.println("Valor a: " + res[0]);
-        System.out.println("Valor b: " + res[1]);
-        System.out.println("Valor c: " + res[2]);
-    }
 }

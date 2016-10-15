@@ -2,7 +2,7 @@
 package com.app.controlador.usuario;
 
 import com.app.controlador.sesion.Sesion;
-import com.app.modelo.conexion.db.Conexion;
+import com.app.modelo.conexion.db.ConexionSQL;
 import com.app.modelo.dao.MuestraDAOImple;
 import com.app.modelo.entidades.Muestra;
 import javax.swing.JOptionPane;
@@ -12,7 +12,7 @@ public class BuscarMuestrasParaGraficar {
     public void graficar(Sesion sesion){
         try{
             //Usuario usuario = sesion.getUsuario();
-            Conexion mySQL = sesion.getMySQL();
+            ConexionSQL mySQL = sesion.getConexionSQL();
             Muestra muestra = new Muestra();
             if(!new MuestraDAOImple().todasMuestras(mySQL.getConexion(), muestra)){
                 JOptionPane.showMessageDialog(null,"No se pudo encontrar las muestras");

@@ -5,7 +5,7 @@
 package com.app.controlador.usuario;
 
 import com.app.controlador.sesion.Sesion;
-import com.app.modelo.conexion.db.Conexion;
+import com.app.modelo.conexion.db.ConexionSQL;
 import com.app.modelo.dao.MuestraDAOImple;
 import com.app.modelo.entidades.Muestra;
 import com.app.modelo.entidades.Usuario;
@@ -17,7 +17,7 @@ public class BuscarMuestraUsuario {
     public void get(Sesion sesion, JTable tabla){
         try{
             Usuario usuario = sesion.getUsuario();
-            Conexion mySQL = sesion.getMySQL();
+            ConexionSQL mySQL = sesion.getConexionSQL();
             List<Muestra> lista = new MuestraDAOImple().todoPorUsuario(mySQL.getConexion(), usuario.getIdUsuario());
             tabla = new JTable(lista.size(), 4);
             for (int i = 0; i < lista.size(); i++) {

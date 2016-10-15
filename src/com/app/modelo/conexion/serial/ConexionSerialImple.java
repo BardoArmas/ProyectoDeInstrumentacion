@@ -90,7 +90,7 @@ public class ConexionSerialImple implements ConexionSerial, SerialPortEventListe
             @Override
             @SuppressWarnings("SleepWhileInLoop")
             public void run() {
-                ConexionSerialImple serial = new ConexionSerialImple(new Parametro("COM5", 9600, 8, 1, 0));
+                ConexionSerialImple serial = new ConexionSerialImple(new Parametro("COM3", 9600, 8, 1, 0));
                 try {
                     serial.abrir();
                     Thread.sleep(2000);

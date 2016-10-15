@@ -6,9 +6,8 @@ package com.app.vista.ig;
 
 import com.app.controlador.muestreo.MostrarComunicacion;
 import com.app.controlador.sesion.Sesion;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import jssc.SerialPortException;
 
 public class Muestreo extends javax.swing.JFrame {
 
@@ -191,10 +190,10 @@ public class Muestreo extends javax.swing.JFrame {
         try {
             // Antes de cerrar la ventana
             mostrarComunicacion.detener();
-            sesion.getArduino().terminar();
+            sesion.getConexionSerial().cerrar();
             principal.setVisible(true);
-        } catch (Exception ex) {
-            Logger.getLogger(Muestreo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SerialPortException ex) {
+            System.err.println("Error " + ex);
         }
     }//GEN-LAST:event_cerrarVentana
 

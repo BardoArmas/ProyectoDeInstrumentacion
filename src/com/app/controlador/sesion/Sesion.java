@@ -4,8 +4,8 @@ pasando de vista en vista
  */
 package com.app.controlador.sesion;
 
-import com.app.modelo.arduino.ComunicacionArduino;
-import com.app.modelo.conexion.db.Conexion;
+import com.app.modelo.conexion.db.ConexionSQL;
+import com.app.modelo.conexion.serial.ConexionSerial;
 import com.app.modelo.entidades.Parametro;
 import com.app.modelo.entidades.Usuario;
 
@@ -14,17 +14,17 @@ public class Sesion {
     //Contiene los atributos de la session
     private Usuario usuario;
     private Parametro parametros;
-    private Conexion mySQL;
-    private ComunicacionArduino arduino;
+    private ConexionSQL conexionSQL;
+    private ConexionSerial conexionSerial;
 
     public Sesion() {
     }
 
-    public Sesion(Usuario usuario, Parametro parametros, Conexion mySQL, ComunicacionArduino arduino) {
+    public Sesion(Usuario usuario, Parametro parametros, ConexionSQL conexionSQL, ConexionSerial conexionSerial) {
         this.usuario = usuario;
         this.parametros = parametros;
-        this.mySQL = mySQL;
-        this.arduino = arduino;
+        this.conexionSQL = conexionSQL;
+        this.conexionSerial = conexionSerial;
     }
 
     public Usuario getUsuario() {
@@ -43,24 +43,22 @@ public class Sesion {
         this.parametros = parametros;
     }
 
-    public Conexion getMySQL() {
-        return mySQL;
+    public ConexionSQL getConexionSQL() {
+        return conexionSQL;
     }
 
-    public void setMySQL(Conexion mySQL) {
-        this.mySQL = mySQL;
+    public void setConexionSQL(ConexionSQL conexionSQL) {
+        this.conexionSQL = conexionSQL;
     }
 
-    public ComunicacionArduino getArduino() {
-        return arduino;
+    public ConexionSerial getConexionSerial() {
+        return conexionSerial;
     }
 
-    public void setArduino(ComunicacionArduino arduino) {
-        this.arduino = arduino;
+    public void setConexionSerial(ConexionSerial conexionSerial) {
+        this.conexionSerial = conexionSerial;
     }
-    
-    
-    
+
     public void terminarSesion(){
         //Invalidar la sesion para iniciar de nuevo
         usuario = null;

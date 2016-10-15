@@ -4,7 +4,7 @@ Dedicado solo a buscar el usuario para poder leerlo
 package com.app.controlador.usuario;
 
 import com.app.controlador.sesion.Sesion;
-import com.app.modelo.conexion.db.Conexion;
+import com.app.modelo.conexion.db.ConexionSQL;
 import com.app.modelo.dao.UsuarioDAOImple;
 import com.app.modelo.entidades.Usuario;
 import com.app.vista.ig.Login;
@@ -17,7 +17,7 @@ public class BuscarUsuario {
     public void get(Sesion sesion, Login login) {
         try {
             Usuario usuario = sesion.getUsuario();
-            Conexion mySQL = sesion.getMySQL();
+            ConexionSQL mySQL = sesion.getConexionSQL();
             usuario = new UsuarioDAOImple().buscar(usuario, mySQL.getConexion());
             if (usuario.getNombre().equals("")) {
                 JOptionPane.showMessageDialog(login, "No se encontro el usuario: usuario no valido");

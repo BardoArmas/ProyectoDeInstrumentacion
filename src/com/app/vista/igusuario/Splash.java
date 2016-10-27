@@ -4,7 +4,7 @@ para cargar todos los elementos necesarios para acceder
 al sistema ya sea una conexion a un manejador de base de datos
 o cehcar los puertos necesarios
  */
-package com.app.vista.ig;
+package com.app.vista.igusuario;
 
 import com.app.controlador.sesion.Sesion;
 import com.app.modelo.conexion.db.ConexionSQL;

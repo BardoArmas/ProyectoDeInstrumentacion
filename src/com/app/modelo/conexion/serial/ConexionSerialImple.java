@@ -17,6 +17,8 @@ public class ConexionSerialImple implements ConexionSerial, SerialPortEventListe
     private String mensajeAux;
 
     public ConexionSerialImple() {
+        this.mensaje = "";
+        this.mensajeAux = "";
     }
 
     public ConexionSerialImple(Parametro parametros) {

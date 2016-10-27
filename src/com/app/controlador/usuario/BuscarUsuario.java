@@ -7,8 +7,8 @@ import com.app.controlador.sesion.Sesion;
 import com.app.modelo.conexion.db.ConexionSQL;
 import com.app.modelo.dao.UsuarioDAOImple;
 import com.app.modelo.entidades.Usuario;
-import com.app.vista.ig.Login;
-import com.app.vista.ig.Principal;
+import com.app.vista.igusuario.Login;
+import com.app.vista.igusuario.Principal;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 

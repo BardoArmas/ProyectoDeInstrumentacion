@@ -8,8 +8,6 @@ import com.app.modelo.conexion.serial.ConexionSerial;
 import com.app.modelo.dialpanel.BarrasPanel;
 import com.app.modelo.dialpanel.DialPanel;
 import java.awt.BorderLayout;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import jssc.SerialPortException;

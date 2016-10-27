@@ -2,8 +2,9 @@
 Aqui se edita las condiciones para poder mostrar las graficas de los sensores
 como baudios, bytes, bit de paro
  */
-package com.app.vista.ig;
+package com.app.vista.igusuario;
 
+import com.app.vista.iggrafica.MuestrasAlmacenadas;
 import com.app.controlador.sesion.Sesion;
 import com.app.controlador.usuario.ConectarPuerto;
 import com.app.modelo.conexion.serial.ConexionSerialImple;

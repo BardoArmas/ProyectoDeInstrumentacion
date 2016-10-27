@@ -1,5 +1,5 @@
 
-package com.app.vista.ig;
+package com.app.vista.iggrafica;
 
 import com.app.controlador.sesion.Sesion;
 import com.app.controlador.usuario.BuscarMuestraUsuario;

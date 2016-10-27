@@ -3,7 +3,7 @@ Un pequeño login para logearse dentro de este sistema
 para poder controlar a los usarios esto se puede remplazar por
 una conexion a base de datos con el manejador de datos deseado
  */
-package com.app.vista.ig;
+package com.app.vista.igusuario;
 
 import com.app.controlador.sesion.Sesion;
 import com.app.controlador.usuario.BuscarUsuario;

@@ -2,10 +2,11 @@
 Este el jframe se muestran los diales ejecutando cambios
 de los sensores casi en tiempo real
  */
-package com.app.vista.ig;
+package com.app.vista.iggrafica;
 
 import com.app.controlador.muestreo.MostrarComunicacion;
 import com.app.controlador.sesion.Sesion;
+import com.app.vista.igusuario.Principal;
 import javax.swing.ImageIcon;
 import jssc.SerialPortException;
 

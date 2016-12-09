@@ -4,6 +4,7 @@ como baudios, bytes, bit de paro
  */
 package com.app.vista.igusuario;
 
+import com.app.controlador.analisis.AnalizarTramas;
 import com.app.vista.iggrafica.MuestrasAlmacenadas;
 import com.app.controlador.sesion.Sesion;
 import com.app.controlador.usuario.ConectarPuerto;
@@ -15,15 +16,16 @@ import javax.swing.JOptionPane;
 public class Principal extends javax.swing.JFrame {
 
     //Aqui en los atributos se puede pasar los parametros del usuario
-    private Sesion sesion;
+    private final Sesion sesion;
     private Parametro parametros;
+    private final AnalizarTramas analizarTramas;
     
     public Principal(Sesion sesion) {
         initComponents();
+        iniciarlizar();
         this.sesion = sesion;
-        iniciarParametros();
-        setIconImage(new ImageIcon("src/com/app/imagenes/icon.png").getImage());
-    }
+        analizarTramas = new AnalizarTramas();
+}
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -219,8 +221,9 @@ public class Principal extends javax.swing.JFrame {
 
     private void botonConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConectarActionPerformed
         // TODO add your handling code here:
-        establecerParametros();
-        ConectarPuerto.hacer(sesion, this);
+        analizarTramas.espera();
+        // establecerParametros();
+        // ConectarPuerto.hacer(sesion, this);
     }//GEN-LAST:event_botonConectarActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
@@ -266,7 +269,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel panelParametros;
     // End of variables declaration//GEN-END:variables
 
-    private void iniciarParametros() {
+    private void iniciarlizar() {
+        setIconImage(new ImageIcon("src/com/app/imagenes/icon.png").getImage());
         Object[] puertos = ConexionSerialImple.puertosDisponibles();
         for (Object puerto : puertos) {
             comboPuertos.addItem((String) puerto);

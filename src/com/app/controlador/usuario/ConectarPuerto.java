@@ -6,7 +6,7 @@ package com.app.controlador.usuario;
 import com.app.controlador.sesion.Sesion;
 import com.app.modelo.conexion.serial.ConexionSerialImple;
 import com.app.vista.iggrafica.Muestreo;
-import com.app.vista.igusuario.Analizar;
+import com.app.vista.igusuario.Analizando;
 import com.app.vista.igusuario.Principal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +21,7 @@ public class ConectarPuerto {
             cs.setParametros(sesion.getParametros());
             cs.abrir();
             principal.setVisible(false);
-            Analizar a = new Analizar();
+            Analizando a = new Analizando();
             new Thread(new Runnable() {
                 @Override
                 public void run() {

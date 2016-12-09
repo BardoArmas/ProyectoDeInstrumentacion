@@ -10,13 +10,14 @@ import com.app.controlador.sesion.Sesion;
 import com.app.modelo.conexion.db.ConexionSQL;
 import com.app.modelo.conexion.serial.ConexionSerial;
 import com.app.modelo.conexion.serial.ConexionSerialImple;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class Splash extends javax.swing.JFrame {
 
     private class Cargar extends Thread {
         
-        private Splash splash;
+        private final Splash splash;
         private Sesion sesion;
         private ConexionSQL conexion;
         private ConexionSerial conexionSerial;
@@ -70,7 +71,7 @@ public class Splash extends javax.swing.JFrame {
 
     public Splash() {
         initComponents();
-        new Cargar(this).start();
+        iniciar();
     }
 
     @SuppressWarnings("unchecked")
@@ -148,6 +149,11 @@ public class Splash extends javax.swing.JFrame {
                 new Splash().setVisible(true);
             }
         });
+    }
+    
+    private void iniciar() {
+        setIconImage(new ImageIcon("src/com/app/imagenes/icon.png").getImage());
+        new Cargar(this).start();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -11,12 +11,29 @@ public class Muestra implements Serializable{
     private String nombre;
     private String descripcion;
     private Date fecha;
-    private Integer[][] xy1;
-    private Integer[][] xy2;
-    private Integer[][] xy3;
+    private Integer[][] sensor1;
+    private Integer[][] sensor2;
+    private Integer[][] sensor3;
     private String datosSerial;
 
     public Muestra() {
+    }
+
+    public Muestra(int idMuestra, int idUsuario, String nombre, String descripcion, Date fecha, Integer[][] sensor1, Integer[][] sensor2, Integer[][] sensor3, String datosSerial) {
+        this.idMuestra = idMuestra;
+        this.idUsuario = idUsuario;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.fecha = fecha;
+        this.sensor1 = sensor1;
+        this.sensor2 = sensor2;
+        this.sensor3 = sensor3;
+        this.datosSerial = datosSerial;
+    }
+
+    public Muestra(int idMuestra, int idUsuario) {
+        this.idMuestra = idMuestra;
+        this.idUsuario = idUsuario;
     }
 
     public int getIdMuestra() {
@@ -25,6 +42,14 @@ public class Muestra implements Serializable{
 
     public void setIdMuestra(int idMuestra) {
         this.idMuestra = idMuestra;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNombre() {
@@ -51,28 +76,28 @@ public class Muestra implements Serializable{
         this.fecha = fecha;
     }
 
-    public Integer[][] getXy1() {
-        return xy1;
+    public Integer[][] getSensor1() {
+        return sensor1;
     }
 
-    public void setXy1(Integer[][] xy1) {
-        this.xy1 = xy1;
+    public void setSensor1(Integer[][] sensor1) {
+        this.sensor1 = sensor1;
     }
 
-    public Integer[][] getXy2() {
-        return xy2;
+    public Integer[][] getSensor2() {
+        return sensor2;
     }
 
-    public void setXy2(Integer[][] xy2) {
-        this.xy2 = xy2;
+    public void setSensor2(Integer[][] sensor2) {
+        this.sensor2 = sensor2;
     }
 
-    public Integer[][] getXy3() {
-        return xy3;
+    public Integer[][] getSensor3() {
+        return sensor3;
     }
 
-    public void setXy3(Integer[][] xy3) {
-        this.xy3 = xy3;
+    public void setSensor3(Integer[][] sensor3) {
+        this.sensor3 = sensor3;
     }
 
     public String getDatosSerial() {
@@ -83,14 +108,6 @@ public class Muestra implements Serializable{
         this.datosSerial = datosSerial;
     }
     
-
-    public int getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
-    }
 
     @Override
     public String toString() {

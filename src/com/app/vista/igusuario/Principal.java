@@ -19,13 +19,13 @@ public class Principal extends javax.swing.JFrame {
     private final Sesion sesion;
     private Parametro parametros;
     private final AnalizarTramas analizarTramas;
-    
+
     public Principal(Sesion sesion) {
         initComponents();
         iniciarlizar();
         this.sesion = sesion;
         analizarTramas = new AnalizarTramas();
-}
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -45,6 +45,7 @@ public class Principal extends javax.swing.JFrame {
         botonConectar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         comboPuertos = new javax.swing.JComboBox<>();
+        botonActualizarPuerto = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuConectar = new javax.swing.JMenuItem();
@@ -92,6 +93,13 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel6.setText("Puertos");
 
+        botonActualizarPuerto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/ajax-refresh-icon.gif"))); // NOI18N
+        botonActualizarPuerto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonActualizarPuertoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelParametrosLayout = new javax.swing.GroupLayout(panelParametros);
         panelParametros.setLayout(panelParametrosLayout);
         panelParametrosLayout.setHorizontalGroup(
@@ -124,6 +132,9 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(numeroSensores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelParametrosLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(botonActualizarPuerto))
         );
         panelParametrosLayout.setVerticalGroup(
             panelParametrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,7 +163,9 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(panelParametrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(comboPuertos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botonActualizarPuerto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(botonConectar)
                 .addContainerGap())
         );
@@ -228,7 +241,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
         //Salir
-        
+
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_menuSalirActionPerformed
@@ -243,8 +256,14 @@ public class Principal extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, sesion.getUsuario().nombreCompleto());
     }//GEN-LAST:event_menuVerUsuarioActionPerformed
 
+    private void botonActualizarPuertoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarPuertoActionPerformed
+        // Actualizar los puertos de entrada
+        puertos();
+    }//GEN-LAST:event_botonActualizarPuertoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonActualizarPuerto;
     private javax.swing.JButton botonConectar;
     private javax.swing.JComboBox comboBaudios;
     private javax.swing.JComboBox comboDatos;
@@ -271,10 +290,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void iniciarlizar() {
         setIconImage(new ImageIcon("src/com/app/imagenes/icon.png").getImage());
-        Object[] puertos = ConexionSerialImple.puertosDisponibles();
-        for (Object puerto : puertos) {
-            comboPuertos.addItem((String) puerto);
-        }
+        puertos();
     }
 
     private void establecerParametros() {
@@ -287,5 +303,13 @@ public class Principal extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Baudios " + baudios + "datos " + datos + "paridad " + paridad + "paro " + paro + " COM " + puerto);
         parametros = new Parametro(puerto, datos, baudios, paro, paridad);
         sesion.setParametros(parametros);
+    }
+
+    private void puertos() {
+        comboPuertos.removeAllItems();
+        Object[] puertos = ConexionSerialImple.puertosDisponibles();
+        for (Object puerto : puertos) {
+            comboPuertos.addItem((String) puerto);
+        }
     }
 }

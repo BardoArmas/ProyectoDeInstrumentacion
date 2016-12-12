@@ -10,21 +10,23 @@ import com.app.controlador.sesion.Sesion;
 import com.app.modelo.conexion.db.ConexionSQL;
 import com.app.modelo.conexion.serial.ConexionSerial;
 import com.app.modelo.conexion.serial.ConexionSerialImple;
+import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class Splash extends javax.swing.JFrame {
 
     private class Cargar extends Thread {
-        
+
         private final Splash splash;
         private Sesion sesion;
         private ConexionSQL conexion;
         private ConexionSerial conexionSerial;
 
-        public Cargar(Splash splash){
+        public Cargar(Splash splash) {
             this.splash = splash;
         }
+
         @Override
         public void run() {
             //Procedimiento de guardar
@@ -38,13 +40,7 @@ public class Splash extends javax.swing.JFrame {
                 //Iniciar la conexion a SQL y conectar
                 estado.setText("Inicio de la conexion a MySQL");
                 conexion = new ConexionSQL();
-                if(!conexion.conectar()){
-                    estado.setText("No exite la base de datos");
-                    barra.setValue(0);
-                    JOptionPane.showMessageDialog(splash, "Error en la conexion a la base de datos", "Base de Datos no encontrada", JOptionPane.ERROR_MESSAGE);
-                    splash.dispose();
-                    return;
-                }
+                conexion.conectar();
                 //La conexion fue exitosa
                 sesion.setConexionSQL(conexion);
                 barra.setValue(30);
@@ -64,6 +60,12 @@ public class Splash extends javax.swing.JFrame {
                 splash.dispose();
             } catch (InterruptedException ex) {
                 System.err.println("Error " + this.toString() + ", " + ex);
+            } catch (ClassNotFoundException ex) {
+                System.err.println("Error driver no encontrado " + ex);
+            } catch (SQLException ex) {
+                estado.setText("No exite la base de datos " + ex);
+                JOptionPane.showMessageDialog(splash, "Error en la conexion a la base de datos", "Base de Datos no encontrada", JOptionPane.ERROR_MESSAGE);
+                splash.dispose();
             }
         }
 
@@ -150,7 +152,7 @@ public class Splash extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private void iniciar() {
         setIconImage(new ImageIcon("src/com/app/imagenes/icon.png").getImage());
         new Cargar(this).start();

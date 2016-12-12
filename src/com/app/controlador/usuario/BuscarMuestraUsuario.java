@@ -9,6 +9,7 @@ import com.app.modelo.conexion.db.ConexionSQL;
 import com.app.modelo.dao.MuestraDAOImple;
 import com.app.modelo.entidades.Muestra;
 import com.app.modelo.entidades.Usuario;
+import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JTable;
 
@@ -31,6 +32,8 @@ public class BuscarMuestraUsuario {
         catch(NullPointerException e){
             //Error al rescatar al usario subido a sesion
             System.err.println("Error al bajar de la session al usuario o la  conexion" + e);
+        } catch (SQLException ex) {
+            System.err.println("Error en la conexion para sacar las muestras por usuario " + ex);
         }
     }
 }

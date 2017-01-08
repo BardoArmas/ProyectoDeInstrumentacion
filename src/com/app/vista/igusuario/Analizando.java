@@ -17,7 +17,7 @@ public class Analizando extends JFrame{
     
     private void inicializar(){
         //Inicializar todos los componentes para visualizar
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Comprobando");
         setUndecorated(true);
         JPanel panel = new JPanel();
@@ -30,11 +30,6 @@ public class Analizando extends JFrame{
         panel.add(imagen);
         pack();
         setLocationRelativeTo(null);
-    }
-    
-    public static void main(String[] args) {
-        //Prueba del jframe
-        new Analizando().setVisible(true);
     }
     
 }

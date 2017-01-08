@@ -20,7 +20,6 @@ public class MostrarComunicacion extends Thread{
     private DialPanel dialPanel;
     private BarrasPanel barrasPanel;
     private final JPanel panelChart, panelDatosEntrada;
-    private ValidarTrama validarTrama;
     //Double valorA,valorB,valorC;
     double [] resultado ;
 
@@ -36,7 +35,6 @@ public class MostrarComunicacion extends Thread{
     public void run() {
         //Inicia el hilo de la lectura la mostrar los resultados en casi tiempo real
         //Sacar el objeto arduino de la sesion, no es necesario se puede omitir
-        validarTrama = new ValidarTrama();
         ConexionSerial cs = sesion.getConexionSerial();
         dialPanel = new DialPanel();
         barrasPanel = new BarrasPanel();
@@ -61,7 +59,6 @@ public class MostrarComunicacion extends Thread{
                 String trama = cs.leerMensaje();
                 areaTexto.append( trama + "\n");
                 areaTexto.setCaretPosition(areaTexto.getDocument().getLength());
-                resultado = validarTrama.hacer(trama);
                 dialPanel.getDataset().setValue(resultado[0]);
                 barrasPanel.escribirValor(resultado[0], resultado[1], resultado[2]);
 //            panel2.getDataset().setValue(resultado[1]);

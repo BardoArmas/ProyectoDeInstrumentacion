@@ -7,7 +7,6 @@ package com.app.vista.igusuario;
 import com.app.controlador.analisis.AnalizarTramas;
 import com.app.vista.iggrafica.MuestrasAlmacenadas;
 import com.app.controlador.sesion.Sesion;
-import com.app.controlador.usuario.ConectarPuerto;
 import com.app.modelo.conexion.serial.ConexionSerialImple;
 import com.app.modelo.entidades.Parametro;
 import javax.swing.ImageIcon;
@@ -234,14 +233,10 @@ public class Principal extends javax.swing.JFrame {
 
     private void botonConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConectarActionPerformed
         // TODO add your handling code here:
-        analizarTramas.espera();
-        // establecerParametros();
-        // ConectarPuerto.hacer(sesion, this);
     }//GEN-LAST:event_botonConectarActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
         //Salir
-
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_menuSalirActionPerformed

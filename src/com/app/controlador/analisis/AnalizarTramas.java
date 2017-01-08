@@ -3,11 +3,47 @@ Esta clase analisa las tramas de entrada por el puerto para verficicar si son co
  */
 package com.app.controlador.analisis;
 
+import com.app.controlador.sesion.Sesion;
+import com.app.modelo.conexion.analizador.Analizador;
+import com.app.modelo.conexion.serial.ConexionSerial;
+import com.app.modelo.entidades.Trama;
+import com.app.vista.iggrafica.Muestreo;
 import com.app.vista.igusuario.Analizando;
+import javax.swing.JOptionPane;
+import jssc.SerialPortException;
 
 public class AnalizarTramas {
-    
-    public void espera(){
-        new Analizando().setVisible(true);
+
+    public void comprobarYConectar(Sesion sesion) {
+        // Mostrar la animacion de espera para detectar un flujo incorrecto
+        Analizando a = new Analizando();
+        a.setVisible(true);
+        // Llamar al analizador
+        Analizador analizador = new Analizador();
+        ConexionSerial conexionSerial = sesion.getConexionSerial();
+        double probabilida = 0.0;
+        try {
+            conexionSerial.abrir();
+            for (int i = 0; i < 100; i++) {
+                Trama trama = analizador.convertir(conexionSerial.leerMensaje());
+                if(trama.getA() != -1){
+                    probabilida++;
+                }
+            }
+            a.setVisible(false);
+            a.dispose();
+            probabilida = probabilida / 100.0;
+            if(probabilida > 0.7){
+                new Muestreo(sesion, null).setVisible(true);
+            }
+            else{
+                JOptionPane.showMessageDialog(a, "Error en el patron de las tramas ", "Tramas no validas", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SerialPortException ex) {
+            System.err.println("Error al abrir el puerto " + ex);
+            JOptionPane.showMessageDialog(a, "Error al conectar al puerto " + ex, "Error al conectar", JOptionPane.ERROR_MESSAGE);
+            a.setVisible(false);
+            a.dispose();
+        }
     }
 }

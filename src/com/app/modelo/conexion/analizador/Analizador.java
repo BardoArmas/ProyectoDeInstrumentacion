@@ -68,15 +68,15 @@ public class Analizador {
         return c >= 48 && c <= 57;
     }
     
-    public static void main(String[] args) {
-        String t = "a709b801c1654";
-        String t2 = "a1344b801c281";
-        String t3 = "a344b8012cg281";
-        String t4 = "a0b0c0";
-        Analizador a = new Analizador();
-        System.out.println(a.convertir(t));
-        System.out.println(a.convertir(t2));
-        System.out.println(a.convertir(t3));
-        System.out.println(a.convertir(t4));
-    }
+//    public static void main(String[] args) {
+//        String t = "a709b801c1654";
+//        String t2 = "a1344b801c281";
+//        String t3 = "a344b8012cg281";
+//        String t4 = "a0b0c0";
+//        Analizador a = new Analizador();
+//        System.out.println(a.convertir(t));
+//        System.out.println(a.convertir(t2));
+//        System.out.println(a.convertir(t3));
+//        System.out.println(a.convertir(t4));
+//    }
 }

@@ -10,6 +10,7 @@ import com.app.controlador.sesion.Sesion;
 import com.app.modelo.conexion.serial.ConexionSerialImple;
 import com.app.modelo.entidades.Parametro;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 public class Principal extends javax.swing.JFrame {
@@ -233,6 +234,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void botonConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConectarActionPerformed
         // TODO add your handling code here:
+        analizarTramas.comprobarYConectar(this,sesion);
     }//GEN-LAST:event_botonConectarActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
@@ -288,18 +290,6 @@ public class Principal extends javax.swing.JFrame {
         puertos();
     }
 
-    private void establecerParametros() {
-        int baudios = Integer.valueOf(String.valueOf(comboBaudios.getSelectedItem()));
-        int datos = Integer.valueOf(String.valueOf(comboDatos.getSelectedItem()));
-        int paridad = Integer.valueOf(String.valueOf(comboParidad.getSelectedIndex()));
-        int paro = Integer.valueOf(String.valueOf(comboParo.getSelectedItem()));
-        String puerto = String.valueOf(comboPuertos.getSelectedItem());
-        //Se establecen los parametros de la conexion a arduino
-        JOptionPane.showMessageDialog(null, "Baudios " + baudios + "datos " + datos + "paridad " + paridad + "paro " + paro + " COM " + puerto);
-        parametros = new Parametro(puerto, datos, baudios, paro, paridad);
-        sesion.setParametros(parametros);
-    }
-
     private void puertos() {
         comboPuertos.removeAllItems();
         Object[] puertos = ConexionSerialImple.puertosDisponibles();
@@ -307,4 +297,46 @@ public class Principal extends javax.swing.JFrame {
             comboPuertos.addItem((String) puerto);
         }
     }
+
+    public JComboBox getComboBaudios() {
+        return comboBaudios;
+    }
+
+    public void setComboBaudios(JComboBox comboBaudios) {
+        this.comboBaudios = comboBaudios;
+    }
+
+    public JComboBox getComboDatos() {
+        return comboDatos;
+    }
+
+    public void setComboDatos(JComboBox comboDatos) {
+        this.comboDatos = comboDatos;
+    }
+
+    public JComboBox getComboParidad() {
+        return comboParidad;
+    }
+
+    public void setComboParidad(JComboBox comboParidad) {
+        this.comboParidad = comboParidad;
+    }
+
+    public JComboBox getComboParo() {
+        return comboParo;
+    }
+
+    public void setComboParo(JComboBox comboParo) {
+        this.comboParo = comboParo;
+    }
+
+    public JComboBox<String> getComboPuertos() {
+        return comboPuertos;
+    }
+
+    public void setComboPuertos(JComboBox<String> comboPuertos) {
+        this.comboPuertos = comboPuertos;
+    }
+    
+    
 }

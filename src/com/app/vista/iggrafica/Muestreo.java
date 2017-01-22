@@ -18,16 +18,17 @@ public class Muestreo extends javax.swing.JFrame {
     private final String dial = "Dial representado en grados bla bla bla";
     private final String nivel = "nivel representado en grados bla bla bla";
     private final String termometro = "termometro representado en grados bla bla bla";
-    
-    public Muestreo(Sesion sesion,Principal principal) {
+
+    public Muestreo(Sesion sesion, Principal principal) {
         initComponents();
+        icono();
         this.sesion = sesion;
         this.principal = principal;
-        setIconImage(new ImageIcon("src/com/app/imagenes/icon.png").getImage());
         lista.setSelectedIndex(0);
-        mostrarComunicacion = new MostrarComunicacion(areaTexto,sesion,panelChart,panelDatosEntrada);
-        mostrarComunicacion.start();
+        mostrarComunicacion = new MostrarComunicacion(areaTexto, sesion, panelChart, panelDatosEntrada);
+        // mostrarComunicacion.start();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -206,13 +207,11 @@ public class Muestreo extends javax.swing.JFrame {
     private void cambiarPanel(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambiarPanel
         // Cambiar el chart en el panel principal
         areaDescripcion.setText(lista.getSelectedValue() + "\n");
-        if(lista.getSelectedIndex() == 0){
+        if (lista.getSelectedIndex() == 0) {
             areaDescripcion.append(dial);
-        }
-        else if(lista.getSelectedIndex() == 1){
+        } else if (lista.getSelectedIndex() == 1) {
             areaDescripcion.append(nivel);
-        }
-        else if(lista.getSelectedIndex() == 2){
+        } else if (lista.getSelectedIndex() == 2) {
             areaDescripcion.append(termometro);
         }
     }//GEN-LAST:event_cambiarPanel
@@ -231,4 +230,8 @@ public class Muestreo extends javax.swing.JFrame {
     private javax.swing.JPanel panelIzquierdo;
     private javax.swing.JPanel panelPrincipal;
     // End of variables declaration//GEN-END:variables
+
+    private void icono() {
+        setIconImage(new ImageIcon("src/com/app/imagenes/icon.png").getImage());
+    }
 }

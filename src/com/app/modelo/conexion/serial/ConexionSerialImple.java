@@ -1,8 +1,6 @@
 package com.app.modelo.conexion.serial;
 
 import com.app.modelo.entidades.Parametro;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import jssc.SerialPort;
 import jssc.SerialPortEvent;
 import jssc.SerialPortEventListener;
@@ -58,7 +56,9 @@ public class ConexionSerialImple implements ConexionSerial, SerialPortEventListe
 
     @Override
     public String leerMensaje() throws SerialPortException {
-        return mensaje;
+        mensajeAux = mensaje;
+        mensaje = "";
+        return mensajeAux;
     }
 
     @Override
@@ -68,13 +68,14 @@ public class ConexionSerialImple implements ConexionSerial, SerialPortEventListe
 
     @Override
     public void serialEvent(SerialPortEvent event) {
-        while (event.isRXCHAR() && event.getEventValue() > 0) {
-            try {
-                String receivedData = serialPort.readString(event.getEventValue());
-                mensaje += receivedData;
-                System.out.println("Received response: " + receivedData);
-            } catch (SerialPortException ex) {
-                System.out.println("Error in receiving string from COM-port: " + ex);
+        if (event.isRXCHAR()) {
+            if (event.getEventValue() > 0) {
+                try {
+                    String receivedData = serialPort.readString(event.getEventValue());
+                    System.out.println("Received response: " + receivedData);
+                } catch (SerialPortException ex) {
+                    System.out.println("Error in receiving string from COM-port: " + ex);
+                }
             }
         }
     }
@@ -88,13 +89,10 @@ public class ConexionSerialImple implements ConexionSerial, SerialPortEventListe
             ConexionSerialImple serial = new ConexionSerialImple(new Parametro("COM7", 9600, 8, 1, 0));
             try {
                 serial.abrir();
-                Thread.sleep(2000);
-                while(true){
-                    System.out.println("Objeto " + serial.leerMensaje());
-                    Thread.sleep(1000);
+                while (true) {
                 }
-            } catch (SerialPortException | InterruptedException ex) {
-                Logger.getLogger(ConexionSerialImple.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SerialPortException ex) {
+                System.err.println("Error al interrumpir " + ex);
             }
         }).start();
     }

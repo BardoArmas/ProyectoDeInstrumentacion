@@ -1,13 +1,12 @@
 package com.app.modelo.conexion.serial;
 
 import com.app.modelo.entidades.Parametro;
+import com.app.vista.iggrafica.Muestreo;
 import jssc.SerialPort;
-import jssc.SerialPortEvent;
-import jssc.SerialPortEventListener;
 import jssc.SerialPortException;
 import jssc.SerialPortList;
 
-public class ConexionSerialImple implements ConexionSerial, SerialPortEventListener {
+public class ConexionSerialImple implements ConexionSerial {
 
     private SerialPort serialPort;
     private Parametro parametros;
@@ -34,14 +33,14 @@ public class ConexionSerialImple implements ConexionSerial, SerialPortEventListe
     }
 
     @Override
-    public void abrir() throws SerialPortException {
+    public void abrir(Muestreo muestreo) throws SerialPortException {
         //Hacer conexion al puerto COM
         mensajeAux = "";
         serialPort = new SerialPort(parametros.getPuerto());
         serialPort.openPort();
         serialPort.setParams(parametros.getBaudios(), parametros.getDato(), parametros.getParo(), parametros.getParidad());
         serialPort.setFlowControlMode(SerialPort.FLOWCONTROL_RTSCTS_IN | SerialPort.FLOWCONTROL_RTSCTS_OUT);
-        serialPort.addEventListener(this, SerialPort.MASK_RXCHAR);
+        serialPort.addEventListener(muestreo, SerialPort.MASK_RXCHAR);
     }
 
     @Override
@@ -66,34 +65,16 @@ public class ConexionSerialImple implements ConexionSerial, SerialPortEventListe
         return serialPort != null;
     }
 
-    @Override
-    public void serialEvent(SerialPortEvent event) {
-        if (event.isRXCHAR()) {
-            if (event.getEventValue() > 0) {
-                try {
-                    String receivedData = serialPort.readString(event.getEventValue());
-                    System.out.println("Received response: " + receivedData);
-                } catch (SerialPortException ex) {
-                    System.out.println("Error in receiving string from COM-port: " + ex);
-                }
-            }
-        }
+    public SerialPort getSerialPort() {
+        return serialPort;
+    }
+
+    public void setSerialPort(SerialPort serialPort) {
+        this.serialPort = serialPort;
     }
 
     public static Object[] puertosDisponibles() {
         return SerialPortList.getPortNames();
     }
 
-    public static void main(String[] args) {
-        new Thread(() -> {
-            ConexionSerialImple serial = new ConexionSerialImple(new Parametro("COM7", 9600, 8, 1, 0));
-            try {
-                serial.abrir();
-                while (true) {
-                }
-            } catch (SerialPortException ex) {
-                System.err.println("Error al interrumpir " + ex);
-            }
-        }).start();
-    }
 }

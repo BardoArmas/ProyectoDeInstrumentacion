@@ -3,7 +3,6 @@ Ventana de analisis de las tramas que se encuentran llegando al puerto
  */
 package com.app.vista.igusuario;
 
-import java.awt.BorderLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
